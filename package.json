@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "npx nodemon -r dotenv/config index.js dotenv_config_path=.env.local",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "lint": "eslint . --ext .ts --fix"
+  },
+  "dependencies": {
+    "apollo-datasource-rest": "^0.12.0",
+    "apollo-server-express": "^2.23.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-middleware": "^6.0.7",
+    "merge-graphql-schemas": "^1.7.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^14.14.41",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "typescript": "^4.2.4"
+  }
+}

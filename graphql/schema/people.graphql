@@ -1,0 +1,15 @@
+type Person {
+    name: String
+    height: String
+    mass: String
+    gender: String
+    homeworld: String
+}
+
+
+type Query {
+    getPeople: [Person]
+    searchPerson: Person
+}
+
+type Mutation {}
