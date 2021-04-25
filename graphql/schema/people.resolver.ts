@@ -1,13 +1,13 @@
 export default {
     Query: {
-        getPeople: async (parent, args, { dataSources }: any) => {
+        getPeople: async (_parent: any, args: any, { dataSources }: any) => {
             try {
                 return await dataSources.people.getAll();
             } catch (error) {
                 return error;
             }
         },
-        searchPerson: async (parent, args, { dataSources }: any) => {
+        searchPerson: async (parent: any, args: any, { dataSources }: any) => {
             try {
                 return await dataSources.people.getSingle();
             } catch (error) {

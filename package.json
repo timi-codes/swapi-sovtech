@@ -4,13 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
-    "dev": "npx nodemon -r dotenv/config index.js dotenv_config_path=.env.local",
-    "build-ts": "tsc",
+    "start": "node build/server.js",
+    "dev": "npx nodemon -r dotenv/config server.ts dotenv_config_path=.env.local",
+    "copy-schemas": "$(yarn bin)/cpx **/*.graphql build",
+    "build-ts": "tsc && yarn run copy-schemas",
     "watch-ts": "tsc -w",
     "lint": "eslint . --ext .ts --fix"
   },
   "dependencies": {
+    "apollo-datasource": "^0.8.0",
     "apollo-datasource-rest": "^0.12.0",
     "apollo-server-express": "^2.23.0",
     "dotenv": "^8.2.0",
@@ -25,8 +27,10 @@
     "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "cpx": "^1.5.0",
     "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }
 }

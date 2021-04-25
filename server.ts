@@ -1,10 +1,16 @@
-import express from 'express';
-import { Server } from 'http';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
+import { DataSources } from "apollo-server-core/dist/graphqlOptions";
+import express from 'express';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { Server } from 'http';
 import { applyMiddleware } from 'graphql-middleware';
-import datasources from './graphql/datasources';
+import SwapiPeopleDatasource from './graphql/datasources';
 import config from './config';
 import graphqlSchema from './graphql';
+
+interface MyDataSources {
+    swapi: SwapiPeopleDatasource,
+}
 
 const { typeDefs, resolvers } = graphqlSchema;
 const app = express();
@@ -23,14 +29,14 @@ const apolloServer = new ApolloServer({
     graphVariant: config.apollo.variant,
     graphId: config.apollo.graphId,
   },
-  dataSources: () => ({
-    swapi: new datasources.Swapi(config.api_url),
+  dataSources: (): DataSources<MyDataSources> => ({
+    swapi: new SwapiPeopleDatasource(config.api_url || ''),
   }),
-  formatError: (err) => {
-    if (err.extensions.code !== 'UNAUTHENTICATED' && err.extensions.code !== 'BAD_USER_INPUT') {
-      console.error(JSON.stringify(err, null, 2)); // eslint-disable-line no-console
+  formatError: (error: GraphQLError): GraphQLFormattedError => {
+    if (error?.extensions?.code !== 'BAD_USER_INPUT') {
+      console.error(JSON.stringify(error, null, 2)); // eslint-disable-line no-console
     }
-    return err;
+    return error;
   }
 });
 

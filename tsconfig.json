@@ -11,6 +11,11 @@
     "esModuleInterop": true,                     
     "resolveJsonModule": true,                      
     "skipLibCheck": true,                           
-    "forceConsistentCasingInFileNames": true 
-  }
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["node_modules/@types", "@types"],
+    "allowSyntheticDefaultImports": true
+  },
+  "files": ["@types/graphql.d.ts"],
+  "include": ["**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
