@@ -1,19 +1,14 @@
 export default {
     Query: {
-        getPeople: async (_parent: any, args: any, { dataSources }: any) => {
+        getPeople: async (_parent: any, { filter }: any, { dataSources }: any) => {
             try {
-                return await dataSources.people.getAll();
-            } catch (error) {
-                return error;
-            }
-        },
-        searchPerson: async (parent: any, args: any, { dataSources }: any) => {
-            try {
-                return await dataSources.people.getSingle();
+                return await dataSources.swapi.getAll({ filter });
             } catch (error) {
                 return error;
             }
         }
     },
-    Mutation: {}
+    Person: {
+        home_world: async ({ homeworld }: any, args: any, { dataSources }: any) => dataSources.swapi.getHomeWorld({ url: homeworld })
+    }
 }

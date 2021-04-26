@@ -9,7 +9,7 @@ import config from './config';
 import graphqlSchema from './graphql';
 
 interface MyDataSources {
-    swapi: SwapiPeopleDatasource,
+  swapi: any,
 }
 
 const { typeDefs, resolvers } = graphqlSchema;
@@ -30,7 +30,7 @@ const apolloServer = new ApolloServer({
     graphId: config.apollo.graphId,
   },
   dataSources: (): DataSources<MyDataSources> => ({
-    swapi: new SwapiPeopleDatasource(config.api_url || ''),
+    swapi: new SwapiPeopleDatasource(config.api_url),
   }),
   formatError: (error: GraphQLError): GraphQLFormattedError => {
     if (error?.extensions?.code !== 'BAD_USER_INPUT') {
@@ -50,7 +50,6 @@ apolloServer.applyMiddleware({ app });
   await serverApp.close();
   return process.exit();
 }
-
 
 const server = app.listen({ port: config.port }, () => console.info(`🚀 Server ready at http://localhost:${config.port}`)); // eslint-disable-line no-console
 

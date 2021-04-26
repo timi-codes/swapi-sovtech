@@ -1,15 +1,42 @@
+type Page {
+    total: Int
+    previous: String
+    next: String
+}
+
+type HomeWorld {
+    name: String
+    rotation_period: String
+    orbital_period: String
+    diameter: String
+    climate: String
+    gravity: String
+    terrain: String
+    surface_water: String
+    population: String
+}
+
 type Person {
     name: String
     height: String
     mass: String
     gender: String
-    homeworld: String
+    home_world: HomeWorld
+}
+
+type PeopleResponse {
+    data: [Person]
+    page: Page
+}
+
+input PageFilter {
+    "Search queries by name"
+    name: String,
+    "Filter by page"
+    page: Int
 }
 
 
 type Query {
-    getPeople: [Person]
-    searchPerson: Person
+    getPeople(filter: PageFilter): PeopleResponse
 }
-
-type Mutation {}
