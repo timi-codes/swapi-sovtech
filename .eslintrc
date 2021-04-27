@@ -5,11 +5,12 @@
     "@typescript-eslint"
   ],
   "extends": [
-    "airbnb-base",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-console": 2
+    "no-console": 2,
+    "import/extensions": "off",
+    "camelcase": "off"
   }
 }

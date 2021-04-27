@@ -13,9 +13,9 @@
     "skipLibCheck": true,                           
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["node_modules/@types", "@types"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "files": ["@types/graphql.d.ts"],
   "include": ["**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "__test__"]
 }

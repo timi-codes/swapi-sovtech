@@ -1,5 +1,5 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server-express';
-import { DataSources } from "apollo-server-core/dist/graphqlOptions";
+import { DataSources } from 'apollo-server-core/dist/graphqlOptions';
 import express from 'express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { Server } from 'http';
@@ -30,14 +30,14 @@ const apolloServer = new ApolloServer({
     graphId: config.apollo.graphId,
   },
   dataSources: (): DataSources<MyDataSources> => ({
-    swapi: new SwapiPeopleDatasource(config.api_url),
+    swapi: new SwapiPeopleDatasource(config.apiUrl),
   }),
   formatError: (error: GraphQLError): GraphQLFormattedError => {
     if (error?.extensions?.code !== 'BAD_USER_INPUT') {
       console.error(JSON.stringify(error, null, 2)); // eslint-disable-line no-console
     }
     return error;
-  }
+  },
 });
 
 (async () => {
@@ -45,11 +45,11 @@ const apolloServer = new ApolloServer({
 })();
 apolloServer.applyMiddleware({ app });
 
- const shutdown  = async(serverApp: Server) => {
+const shutdown = async (serverApp: Server) => {
   console.info('Received kill signal, shutting down gracefully'); // eslint-disable-line no-console
   await serverApp.close();
   return process.exit();
-}
+};
 
 const server = app.listen({ port: config.port }, () => console.info(`🚀 Server ready at http://localhost:${config.port}`)); // eslint-disable-line no-console
 
@@ -60,5 +60,3 @@ process.on('SIGINT', async () => {
 process.on('SIGTERM', async () => {
   await shutdown(server);
 });
-
-

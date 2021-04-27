@@ -1,0 +1,11 @@
+{
+    "name": "Stewjon",
+    "terrain": "grass",
+    "population": "unknown",
+    "orbital_period": "unknown",
+    "rotation_period": "unknown",
+    "diameter": "0",
+    "climate": "temperate",
+    "gravity": "1 standard",
+    "surface_water": "unknown"
+}
