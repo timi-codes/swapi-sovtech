@@ -24,11 +24,6 @@ const apolloServer = new ApolloServer({
       resolvers,
     }),
   ),
-  apollo: {
-    key: `service:${config.apollo.apikey}`,
-    graphVariant: config.apollo.variant,
-    graphId: config.apollo.graphId,
-  },
   dataSources: (): DataSources<MyDataSources> => ({
     swapi: new SwapiPeopleDatasource(config.apiUrl),
   }),
@@ -51,7 +46,7 @@ const shutdown = async (serverApp: Server) => {
   return process.exit();
 };
 
-const server = app.listen({ port: config.port }, () => console.info(`🚀 Server ready at http://localhost:${config.port}`)); // eslint-disable-line no-console
+const server = app.listen({ port: config.port }, () => console.info(`🚀 Server ready at http://localhost:${config.port }`)); // eslint-disable-line no-console
 
 process.on('SIGINT', async () => {
   await shutdown(server);
@@ -60,3 +55,5 @@ process.on('SIGINT', async () => {
 process.on('SIGTERM', async () => {
   await shutdown(server);
 });
+
+export default app;

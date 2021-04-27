@@ -1,8 +1,8 @@
-const apolloClient = require('./client');
-const { getPeopleQuery } = require('./queries');
-const peopleData = require('./static/people.json');
-const homeWorldData = require('./static/homeworld.json');
-const SwapiPeopleDataSource = require('../graphql/datasources');
+import apolloClient from './client';
+import { getPeopleQuery } from './queries';
+import peopleData from './static/people.json';
+import homeWorldData from './static/homeworld.json';
+import SwapiPeopleDataSource from '../graphql/datasources';
 
 const swapiApiMock = jest.fn(async () => {
   return Promise.resolve(peopleData);
@@ -27,6 +27,6 @@ describe('people.integration', () => {
       expect(statusCode).toBe(200);
       expect(getPeople.data).toHaveLength(10);
       expect(getPeople).toHaveProperty('page');
-      expect(getPeople.page).toHaveProperty('home_world');
+      expect(getPeople.data[0]).toHaveProperty('home_world');
     });
 });

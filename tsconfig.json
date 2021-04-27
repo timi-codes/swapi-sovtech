@@ -17,5 +17,5 @@
   },
   "files": ["@types/graphql.d.ts"],
   "include": ["**/*"],
-  "exclude": ["node_modules", "__test__"]
+  "exclude": ["node_modules", "__test__/*"]
 }
