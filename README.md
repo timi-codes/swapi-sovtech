@@ -1,5 +1,5 @@
 # swapi-sovtech
- Swapi-Sovtech Code Challenge
+ Swapi-Sovtech Code Challenge - 
 A GraphQL API that wraps the Star Wars API (https://swapi.dev/)
 
 #### Getting Started
