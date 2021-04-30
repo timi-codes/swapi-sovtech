@@ -1,19 +1,16 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
-import Link from 'next/link'
 import People from 'components/people';
-import Date from '../components/date'
 
-export default function Home({ allPostsData }) {
+export default function Home() {
   const { query } = useRouter();
+  console.log(query)
   const page = parseInt(query.page);
 
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>

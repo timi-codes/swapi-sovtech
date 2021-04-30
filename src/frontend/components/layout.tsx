@@ -7,7 +7,7 @@ import Link from 'next/link'
 const name = 'SWAPI-SOVTECH'
 export const siteTitle = 'Next.js Sample Website'
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -26,39 +26,18 @@ export default function Layout({ children, home }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
-        {home ? (
-          <>
+        <Link href="/">
+          <a>
             <Image
               priority
               src="/images/logo.png"
-              // className={utilStyles.borderCircle}
               height={114}
               width={194}
               alt={name}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
+          </a>
+        </Link>
+        <h1 className={utilStyles.heading2Xl}>{name}</h1>
       </header>
       <main>{children}</main>
     </div>

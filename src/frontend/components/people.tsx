@@ -11,24 +11,26 @@ const PeopleListStyle = styled.div`
 `;
 
 const People = ({ page }) => {
-    const { data, error, loading } = useGetPeople({})
+    const { data, error, loading } = useGetPeople({
+        variables: {
+            filter: {
+                page
+            }
+        }
+    })
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
     const { getPeople } = data;
 
-    const handleSearchChange = (e) => {
-        
-    }
-
     return (
         <div>
-            <Search value="" onSearchChange={handleSearchChange}/>
+            <Search />
             <Pagination count={getPeople.page.total} page={page}/>
             <PeopleListStyle>
                 {
-                    getPeople.data.map((person) => <Person data={person}/>)
+                    getPeople.data.map((person) => <Person key={person.name} data={person}/>)
                 }
             </PeopleListStyle>
             <Pagination count={getPeople.page.total} page={page}/>

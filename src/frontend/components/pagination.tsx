@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -40,14 +38,14 @@ const perPage = 10;
           Sick Fits - Page {page} of {pageCount}
         </title>
       </Head>
-      <Link href={`/products/${page - 1}`}>
+      <Link href={`/?page=${page - 1}`}>
         <a aria-disabled={page <= 1}>← Prev</a>
       </Link>
       <p>
         Page {page} of {pageCount}
       </p>
       <p>{count} Items Total</p>
-      <Link href={`/products/${page + 1}`}>
+      <Link href={`/?page=${page + 1}`}>
         <a aria-disabled={page >= pageCount}>Next →</a>
       </Link>
     </PaginationStyle>

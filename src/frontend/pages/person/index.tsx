@@ -1,16 +1,14 @@
+import Layout from '../../components/layout'
 import { Container, Title, SubTitle, Row, HomeWorldList } from 'components/styles/person.style';
+import { GET_PEOPLE_QUERY } from 'hooks/use-get-people'
+import { initializeApollo } from "hooks/use-apollo";
 
-const Person = ({ data }) => {
-
-    const gender = {
-        male: "M",
-        female: "F",
-        "n/a": "N/A"
-    }
-
-    return (
-        <Container>
-            <Title>{data.name} - {gender[data.gender]}</Title>
+export default function Person({ data }) {
+  return (
+    <Layout>
+       <Container>
+            <Title>{data.name}</Title>
+            <Row>Gender:<span>{data.gender}</span></Row>
             <Row>Mass:<span>{data.mass}</span></Row>
             <Row>Height:<span>{data.height}</span></Row>
             <Row>Mass:<span>{data.mass}</span></Row>
@@ -28,7 +26,28 @@ const Person = ({ data }) => {
             </HomeWorldList>
             <Row>Terrain:<span>{data.home_world.terrain}</span></Row>
         </Container>
-    )
+    </Layout>
+
+  )
 }
 
-export default Person;
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const client = initializeApollo(context);
+  const { data } = await client.query({
+    query: GET_PEOPLE_QUERY,
+    variables: {
+      filter: {
+        name: query.name
+      }
+    }
+  });
+
+  console.log();
+  
+  return {
+    props: {
+      data: data.getPeople.data[0]
+    }
+  }
+}
