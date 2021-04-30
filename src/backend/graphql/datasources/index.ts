@@ -39,13 +39,6 @@ class SwapiPeopleDatasource extends RESTDataSource {
     this.baseURL = apiUrl;
   }
 
-  didEncounterError = ({ message, extensions }: any) => {
-    if (extensions && extensions.response.body.message) {
-      throw new UserInputError(extensions.response.body.message, extensions);
-    }
-    throw new Error(message);
-  }
-
   async request(url: URLSearchParams): Promise<any>{
     return await this.get(`/people/?${url.toString()}`);
   }

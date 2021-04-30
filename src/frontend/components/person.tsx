@@ -1,6 +1,9 @@
+import { FunctionComponent } from 'react'
 import { Container, Title, SubTitle, Row, HomeWorldList } from 'components/styles/person.style';
+import Link from 'next/link';
+import { Person } from '@types'
 
-const Person = ({ data }) => {
+const PersonComponent : FunctionComponent<{data: Person}> = ({ data }) => {
 
     const gender = {
         male: "M",
@@ -10,7 +13,12 @@ const Person = ({ data }) => {
 
     return (
         <Container>
-            <Title>{data.name} - {gender[data.gender]}</Title>
+            <Title>
+                <Link href={`/person/?name=${data.name}`}>
+                    <a>{data.name} - {gender[data.gender]}
+                    </a>
+                </Link>
+            </Title>
             <Row>Mass:<span>{data.mass}</span></Row>
             <Row>Height:<span>{data.height}</span></Row>
             <Row>Mass:<span>{data.mass}</span></Row>
@@ -31,4 +39,4 @@ const Person = ({ data }) => {
     )
 }
 
-export default Person;
+export default PersonComponent;

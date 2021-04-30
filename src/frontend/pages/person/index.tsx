@@ -1,9 +1,11 @@
+import { FunctionComponent } from 'react'
 import Layout from '../../components/layout'
 import { Container, Title, SubTitle, Row, HomeWorldList } from 'components/styles/person.style';
 import { GET_PEOPLE_QUERY } from 'hooks/use-get-people'
 import { initializeApollo } from "hooks/use-apollo";
+import { Person } from '@types'
 
-export default function Person({ data }) {
+const PersonDetail : FunctionComponent<{data: Person}> = ({ data }) => {
   return (
     <Layout>
        <Container>
@@ -42,8 +44,6 @@ export async function getServerSideProps(context) {
       }
     }
   });
-
-  console.log();
   
   return {
     props: {
@@ -51,3 +51,5 @@ export async function getServerSideProps(context) {
     }
   }
 }
+
+export default PersonDetail;

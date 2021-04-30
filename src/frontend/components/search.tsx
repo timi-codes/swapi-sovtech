@@ -1,16 +1,10 @@
+import { FunctionComponent } from 'react'
 import styled from 'styled-components';
 import { useCombobox, UseComboboxStateChange } from 'downshift'
 import { useFilters } from 'hooks/use-get-people';
 import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
-
-interface Person {
-    name: string
-    height: string
-    mass: string
-    gender: string
-    homeworld: string
-}
+import { Person } from '@types'
 
 const InputContainer = styled.input`
     border-radius: 5px;
@@ -23,7 +17,7 @@ const InputContainer = styled.input`
 `;
 
 const SearchContainer = styled.div`
-    width: 22rem;
+    max-width: 22rem;
     margin 0 auto;
     margin-top: 2rem;
     display: flex;
@@ -54,9 +48,9 @@ const DropDownItem = styled.li`
 `;
 
 
-const Search = () => {
+const Search: FunctionComponent = () => {
     const { isSearching, searchResult, setFilters }  = useFilters();
-    const delaySearch = debounce(setFilters, 350);
+    const delaySearch = debounce(setFilters, 500);
     const result = searchResult?.getPeople.data || [];
     const router = useRouter();
 
@@ -69,9 +63,8 @@ const Search = () => {
     getItemProps,
     highlightedIndex,
   } = useCombobox({
-    items: result,
+      items: result,
       onInputValueChange() {
-        console.log("==>", inputValue)
         delaySearch({
             name: inputValue 
         });

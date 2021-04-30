@@ -1,6 +1,12 @@
+import { FunctionComponent } from 'react'
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
+
+interface PaginationProps {
+  page: number
+  count: number
+}
 
 const PaginationStyle = styled.div`
   text-align: center;
@@ -25,17 +31,23 @@ const PaginationStyle = styled.div`
     color: grey;
     pointer-events: none;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 11px;
+    & > * {
+      padding: 12px 14px;
+  }
+  }
 `;
 
 
-const Pagination = ({ page, count }) => {
+const Pagination: FunctionComponent<PaginationProps> = ({ page, count }) => {
 const perPage = 10;
-  const pageCount = Math.ceil(count / perPage);
+  const pageCount: number = Math.ceil(count / perPage);
   return (
     <PaginationStyle>
       <Head>
         <title>
-          Sick Fits - Page {page} of {pageCount}
+          Swapi - Page {page} of {pageCount}
         </title>
       </Head>
       <Link href={`/?page=${page - 1}`}>

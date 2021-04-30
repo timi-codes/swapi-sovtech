@@ -1,4 +1,5 @@
-import { useQuery, gql, useMutation, useLazyQuery } from '@apollo/client';
+import { useQuery, gql, useLazyQuery } from '@apollo/client';
+import { PageFilter, PersonResponseData, PageFilterVariables} from '@types'
 
 export const GET_PEOPLE_QUERY = gql`
 query GetPeople($filter: PageFilter) {
@@ -29,7 +30,7 @@ query GetPeople($filter: PageFilter) {
 }
 `
 
-export const useGetPeople = (options) => useQuery(GET_PEOPLE_QUERY, options);
+export const useGetPeople = (options) => useQuery<PersonResponseData, PageFilterVariables>(GET_PEOPLE_QUERY, options);
 
 export const useFilters = () => {
   const [onSearch, { data, refetch, loading }] = useLazyQuery(GET_PEOPLE_QUERY, {
@@ -37,7 +38,7 @@ export const useFilters = () => {
     fetchPolicy: 'network-only',
   });
 
-  const setFilters = ({ name, page }) => {
+  const setFilters = ({ name, page }: PageFilter) => {
     onSearch({
         variables: {
             filter: {

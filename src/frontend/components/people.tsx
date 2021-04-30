@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import { useGetPeople } from 'hooks/use-get-people';
 import styled from 'styled-components';
 import Person from './person';
@@ -8,9 +9,12 @@ const PeopleListStyle = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1.5rem;
+    @media only screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
-const People = ({ page }) => {
+const People: FunctionComponent<{ page: number }> = ({ page }) => {
     const { data, error, loading } = useGetPeople({
         variables: {
             filter: {
